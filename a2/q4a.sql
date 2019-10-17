@@ -1,4 +1,5 @@
-SELECT T.course_id, T.sec_id, T.semester, T.year, COUNT(T.ID) as Enrollment 
-FROM takes T 
-GROUP BY course_id, sec_id, semester, year 
-HAVING semester = "Fall" and year = 2009
+SELECT S.course_id, S.sec_id, COUNT(T.ID)
+FROM section S LEFT OUTER JOIN takes T
+ON  T.sec_id = S.sec_id AND T.course_id = S.course_id  AND S.year = T.year AND T.semester = S.semester
+WHERE S.year = 2009 and S.semester = "FALL"
+GROUP BY course_id, sec_id
